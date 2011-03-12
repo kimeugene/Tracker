@@ -11,12 +11,12 @@ public class History extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.history);
         
-        Button save_btn = (Button) findViewById(R.id.save_btn);
-        save_btn.setOnClickListener(new View.OnClickListener() {
+        Button back_btn = (Button) findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), History.class);
+                Intent myIntent = new Intent(view.getContext(), Main.class);
                 startActivityForResult(myIntent, 0);
             }
         });

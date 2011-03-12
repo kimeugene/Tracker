@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<Button android:text="Next"
-        android:id="@+id/save_btn"
-        android:layout_width="250px"
-        android:textSize="18px"
-        android:layout_height="55px" />
+    android:layout_height="fill_parent">
+    
+    <Button android:id="@+id/history_btn" 
+        android:layout_width="100px" 
+        android:textSize="18px" 
+        android:text="History" 
+        android:layout_height="55px">
+    </Button>
 </LinearLayout>
