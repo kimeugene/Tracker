@@ -1,12 +1,12 @@
 package com.tracker;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.widget.Button;
-import android.view.View;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-public class main extends Activity {
+public class History extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {

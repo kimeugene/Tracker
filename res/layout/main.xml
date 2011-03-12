@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     >
 <Button android:text="Next"
-        android:id="@+id/Button01"
+        android:id="@+id/save_btn"
         android:layout_width="250px"
         android:textSize="18px"
         android:layout_height="55px" />
