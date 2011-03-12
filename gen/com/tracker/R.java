@@ -16,6 +16,7 @@ public final class R {
     public static final class id {
         public static final int back_btn=0x7f050000;
         public static final int history_btn=0x7f050001;
+        public static final int save_event_btn=0x7f050002;
     }
     public static final class layout {
         public static final int history=0x7f030000;
