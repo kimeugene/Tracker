@@ -17,4 +17,12 @@
         android:layout_width="100px"
         android:layout_height="50px"
         android:layout_centerInParent="true"/>
+        
+    <TextView 
+    	android:id="@+id/txtCounter" 
+    	android:layout_alignParentRight="true" 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="100px"
+    	android:text="" android:textSize="14px">
+    	</TextView>
 </RelativeLayout>
