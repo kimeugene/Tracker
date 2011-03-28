@@ -24,8 +24,18 @@ public class Main extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        // start timer
-        SetTimer();
+        DbOpenHelper dbOpenHelper = new DbOpenHelper(Main.this);
+        SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT date FROM history ORDER BY id DESC LIMIT 1", null);
+        int cnt = cursor.getCount();
+        db.close();
+        
+        if (cnt > 0){
+        	cursor.moveToFirst();
+            String lastDate = cursor.getString(0);        
+            // start timer
+            SetTimer(lastDate);
+        }
         
         Button history_btn = (Button) findViewById(R.id.history_btn);
         history_btn.setOnClickListener(new View.OnClickListener() {
@@ -42,10 +52,11 @@ public class Main extends Activity
 			    DbOpenHelper dbOpenHelper = new DbOpenHelper(Main.this);
 			    SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 			    ContentValues cv = new ContentValues();
-			    cv.put(DbOpenHelper.DATE, new Date().toString());
+			    String lastDate = new Date().toString();
+			    cv.put(DbOpenHelper.DATE, lastDate);
 			    db.insert(DbOpenHelper.TABLE_NAME, null, cv);
 			    db.close();
-			    SetTimer();
+			    SetTimer(lastDate);
 			}
 	    });
     }
@@ -53,18 +64,12 @@ public class Main extends Activity
     /**
      * Retrieves the latest entry and starts timer
      */
-    public void SetTimer()
+    public void SetTimer(String lastDate)
     {
+    	long dte = Date.parse(lastDate);
     	TextView txt = (TextView) findViewById(R.id.txtCounter);
-        DbOpenHelper dbOpenHelper = new DbOpenHelper(Main.this);
-        SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT date FROM history ORDER BY id DESC LIMIT 1", null);
-        cursor.moveToLast();
-        db.close();
-
-        long lastDate = Date.parse(cursor.getString(0));        
         Timer timer = new Timer();
-        TimerTask task = new MyTimerTask(txt, lastDate);
+        TimerTask task = new MyTimerTask(txt, dte);
         timer.schedule(task, 1, 300);        
     }
 }
