@@ -2,8 +2,6 @@ package com.tracker;
 
 import java.util.TimerTask;
 
-import com.tracker.R.string;
-
 import android.graphics.Color;
 import android.os.Handler;
 import android.widget.TextView;
