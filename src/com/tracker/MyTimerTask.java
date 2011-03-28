@@ -9,8 +9,11 @@ import android.widget.TextView;
 public class MyTimerTask extends TimerTask 
 {
 	TextView txtView;
-	long lastDate = 0;
+	
+	private long lastDate = 0;
+	
 	Handler handler = new Handler();
+	
 	public MyTimerTask(TextView txtView, long lastDate)
 	{
 		this.txtView = txtView;
@@ -24,18 +27,20 @@ public class MyTimerTask extends TimerTask
     		public void run() 
     		{
     			long millis = System.currentTimeMillis() - lastDate;
-    		 	int minutes = (int)(millis/60000);
+    			int seconds = (int)(millis / 1000);
+    		 	int minutes = seconds / 60;
     		 	int hours = minutes / 60;
     		 	int days = hours / 24;
     		 	hours = hours % 24;
     		 	minutes = minutes % 60;
+    		 	seconds = seconds % 60;
     		 	if(days <= 1)
     		 		txtView.setBackgroundColor(Color.GREEN);
     		 	else if(days <= 2)
     		 		txtView.setBackgroundColor(Color.YELLOW);
     		 	else
     		 		txtView.setBackgroundColor(Color.RED);
-    		 	txtView.setText(String.format("%d days %d hours %d minutes", days, hours, minutes));    			
+    		 	txtView.setText(String.format("%d days \n %d:%d:%d", days, hours, minutes, seconds));    			
 			}
         
     	});

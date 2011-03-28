@@ -24,6 +24,7 @@ public class Main extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
+        // start timer
         SetTimer();
         
         Button history_btn = (Button) findViewById(R.id.history_btn);
@@ -49,18 +50,21 @@ public class Main extends Activity
 	    });
     }
     
+    /**
+     * Retrieves the latest entry and starts timer
+     */
     public void SetTimer()
     {
     	TextView txt = (TextView) findViewById(R.id.txtCounter);
         DbOpenHelper dbOpenHelper = new DbOpenHelper(Main.this);
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT date FROM history", null);
+        Cursor cursor = db.rawQuery("SELECT date FROM history ORDER BY id DESC LIMIT 1", null);
         cursor.moveToLast();
         db.close();
 
         long lastDate = Date.parse(cursor.getString(0));        
         Timer timer = new Timer();
         TimerTask task = new MyTimerTask(txt, lastDate);
-        timer.schedule(task, 1, 60000);        
+        timer.schedule(task, 1, 300);        
     }
 }
