@@ -18,6 +18,7 @@ import android.content.ContentValues;
 
 public class Main extends Activity 
 {
+	Timer timer;
     /** Called when the activity is first created. */
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,8 @@ public class Main extends Activity
 			    cv.put(DbOpenHelper.DATE, lastDate);
 			    db.insert(DbOpenHelper.TABLE_NAME, null, cv);
 			    db.close();
+			    if(timer != null)
+			    	timer.cancel();
 			    SetTimer(lastDate);
 			}
 	    });
@@ -68,8 +71,14 @@ public class Main extends Activity
     {
     	long dte = Date.parse(lastDate);
     	TextView txt = (TextView) findViewById(R.id.txtCounter);
-        Timer timer = new Timer();
+        timer = new Timer();
         TimerTask task = new MyTimerTask(txt, dte);
         timer.schedule(task, 1, 300);        
+    }
+    
+    @Override 
+    protected void onStop(){
+    	super.onStop(); 
+    	timer.cancel();
     }
 }
