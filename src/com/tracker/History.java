@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 
@@ -24,7 +24,7 @@ public class History extends Activity {
             }
         });
         
-        TextView view = (TextView) findViewById(R.id.history);
+        ListView view = (ListView) findViewById(R.id.history);
 
         DbOpenHelper dbOpenHelper = new DbOpenHelper(History.this);
 	    SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
@@ -34,11 +34,15 @@ public class History extends Activity {
         Cursor cur = db.query("history", 
        		null, null, null, null, null, null);
         cur.moveToFirst();
-        while (cur.isAfterLast() == false) {
-            view.append("\n" + cur.getString(1));
-       	    cur.moveToNext();
-        }
+        int count = cur.getCount();
+   	 	String[] arr = new String[count];
+   	 	for(int i = 0; i < count; i++)
+   	 	{
+   	 		cur.moveToPosition(i);
+   	 		arr[i] = cur.getString(1);
+   	 	}
         cur.close();
-
+        CustomAdapter adapter = new CustomAdapter(this,R.layout.row, arr);
+        view.setAdapter(adapter);
     }
 }

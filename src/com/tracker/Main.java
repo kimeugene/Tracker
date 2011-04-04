@@ -9,9 +9,7 @@ import android.content.Intent;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import com.tracker.DbOpenHelper;
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
