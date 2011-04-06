@@ -11,12 +11,13 @@
         android:layout_height="55px">
     </Button>
     
-    <Button
-        android:id="@+id/save_event_btn"
-        android:text="I've made it"
-        android:layout_width="100px"
-        android:layout_height="50px"
-        android:layout_centerInParent="true"/>
+    <ImageView
+        android:id="@+id/save_event_imv"
+        android:layout_centerInParent="true"
+    	android:layout_height="100px"
+    	android:layout_width="100px"/>
+        
+    
         
     <TextView 
     	android:id="@+id/txtCounter" 
@@ -24,5 +25,5 @@
     	android:layout_height="wrap_content" 
     	android:layout_width="100px"
     	android:text="" android:textSize="14px">
-    	</TextView>
+    </TextView>
 </RelativeLayout>
