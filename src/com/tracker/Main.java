@@ -16,6 +16,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.content.ContentValues;
+import android.util.Log;
 
 public class Main extends Activity 
 {
@@ -24,6 +25,7 @@ public class Main extends Activity
 	private boolean isOpen;
 	private final static int DURATION = 100;
     private AnimationDrawable mAnimation = null;
+    private static final String TAG = "MainActivity"; 
     
     /** Called when the activity is first created. */
     @Override
@@ -68,58 +70,35 @@ public class Main extends Activity
         mAnimation.setOneShot(true);
     	if(isOpen)
     	{    		
-	    	BitmapDrawable frame1 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open); 
-	    	BitmapDrawable frame2 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_pressing1); 
-	    	BitmapDrawable frame3 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_pressing2); 
-	    	BitmapDrawable frame4 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_pressing3);
-	    	BitmapDrawable frame5 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_pressing3); 
-	    	BitmapDrawable frame6 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_pressing2);
-	    	BitmapDrawable frame7 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_pressing1);
-	    	BitmapDrawable frame8 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up9);
-	    	BitmapDrawable frame9 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up8);
-	    	BitmapDrawable frame10 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up7);	
-	    	BitmapDrawable frame11 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up6);
-	    	BitmapDrawable frame12 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up5);
-	    	BitmapDrawable frame13 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up4);
-	    	BitmapDrawable frame14 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up3);
-	    	BitmapDrawable frame15 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up2);
-	    	BitmapDrawable frame16 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up1);
-	    	BitmapDrawable frame17 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_close);
-	    	mAnimation.addFrame(frame1, DURATION);
-	        mAnimation.addFrame(frame2, DURATION);
-	        mAnimation.addFrame(frame3, DURATION);
-	        mAnimation.addFrame(frame4, DURATION);
-	        mAnimation.addFrame(frame5, DURATION);
-	        mAnimation.addFrame(frame6, DURATION);
-	        mAnimation.addFrame(frame7, DURATION);
-	        mAnimation.addFrame(frame8, DURATION);
-	        mAnimation.addFrame(frame9, DURATION);
-	        mAnimation.addFrame(frame10, DURATION);
-	        mAnimation.addFrame(frame11, DURATION);
-	        mAnimation.addFrame(frame12, DURATION);
-	        mAnimation.addFrame(frame13, DURATION);
-	        mAnimation.addFrame(frame14, DURATION);
-	        mAnimation.addFrame(frame15, DURATION);
-	        mAnimation.addFrame(frame16, DURATION);
-	        mAnimation.addFrame(frame17, DURATION);
-	        
+    		BitmapDrawable[] frames = new BitmapDrawable[17];
+    		frames[0] = (BitmapDrawable) getResources().getDrawable(R.drawable.button_open);
+    		
+    		// frames 1,2,3
+    		// button_pressing 1,2,3
+    		for (int i = 1; i < 4; i++) {
+    			int resID = getResources().getIdentifier("button_pressing" + i, "drawable", getPackageName());
+    			frames[i] = (BitmapDrawable) getResources().getDrawable(resID);
+    		}
+
+    		// frames 4,5,6 
+    		// button_pressing 3,2,1
+    		for (int i = 3; i > 0; i--) {
+    			int resID = getResources().getIdentifier("button_pressing" + i, "drawable", getPackageName());
+    			frames[7 - i] = (BitmapDrawable) getResources().getDrawable(resID);
+    		}
+
+    		// frames 7..15
+    		// button_open_up 9..1
+    		for (int i = 7; i < 16; i++) {
+    			int resID = getResources().getIdentifier("button_open_up" + (16 - i), "drawable", getPackageName());
+    			frames[i] = (BitmapDrawable) getResources().getDrawable(resID);
+    		}
+	    	frames[16] = (BitmapDrawable) getResources().getDrawable(R.drawable.button_close);
+	    	
+    		for (int i = 0; i <= 16; i++) {
+    	    	mAnimation.addFrame(frames[i], DURATION);
+    		}
+	    	
     		DbOpenHelper dbOpenHelper = new DbOpenHelper(Main.this);
 		    SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 		    ContentValues cv = new ContentValues();

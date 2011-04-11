@@ -31,8 +31,7 @@ public class History extends Activity {
         db.setVersion(1);
         db.setLockingEnabled(true);
         
-        Cursor cur = db.query("history", 
-       		null, null, null, null, null, null);
+        Cursor cur = db.query("history", null, null, null, null, null, null);
         cur.moveToFirst();
         int count = cur.getCount();
    	 	String[] arr = new String[count];
