@@ -57,8 +57,10 @@ public class Main extends Activity
         save_event_imv = (ImageView) findViewById(R.id.save_event_imv);
         save_event_imv.setBackgroundResource(R.drawable.button_close);
         save_event_imv.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startAnimation();
+        	public void onClick(View view) {
+			    Intent myIntent = new Intent(view.getContext(), ContactInfo.class);
+			    startActivityForResult(myIntent, 0);
+                //startAnimation();
             }
         });
     }
