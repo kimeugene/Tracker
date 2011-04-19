@@ -12,9 +12,13 @@ public class DbOpenHelper extends SQLiteOpenHelper{
 
     public static final String TABLE_NAME = "history";
     public static final String ID = "id";
-    public static final String DATE = "date";
+    public static final String Date = "date";
+    public static final String Name = "name";
+    public static final String Photo = "photo";
+    public static final String Comments = "comments";
+    public static final String Rating = "rating";
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + " (id integer primary key autoincrement, "
-            + DATE + " TEXT )";
+            + Date + " TEXT, " + Name + " TEXT, " + Photo + " TEXT, " + Comments + " TEXT, " + Rating + " NUMERIC)";
 
 
     public DbOpenHelper(Context context) {

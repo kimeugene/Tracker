@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 import android.content.Intent;
+
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,9 +16,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
-import android.content.ContentValues;
-import android.util.Log;
-
 public class Main extends Activity 
 {
 	Timer timer;
@@ -33,18 +31,7 @@ public class Main extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         isOpen = false;
-        DbOpenHelper dbOpenHelper = new DbOpenHelper(Main.this);
-        SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT date FROM history ORDER BY id DESC LIMIT 1", null);
-        int cnt = cursor.getCount();
-        db.close();
-        
-        if (cnt > 0){
-        	cursor.moveToFirst();
-            String lastDate = cursor.getString(0);        
-            // start timer
-            SetTimer(lastDate);
-        }
+        SetTimer();
         
         Button history_btn = (Button) findViewById(R.id.history_btn);
         history_btn.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +45,14 @@ public class Main extends Activity
         save_event_imv.setBackgroundResource(R.drawable.button_close);
         save_event_imv.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) {
-			    Intent myIntent = new Intent(view.getContext(), ContactInfo.class);
-			    startActivityForResult(myIntent, 0);
-                //startAnimation();
+        		startAnimation();
+        		if(!isOpen){        			
+				    Intent myIntent = new Intent(view.getContext(), ContactInfo.class);
+				    startActivityForResult(myIntent, 0);
+				    if(timer != null)
+				    	timer.cancel();
+				    SetTimer(); 
+        		}
             }
         });
     }
@@ -100,17 +92,6 @@ public class Main extends Activity
     		for (int i = 0; i <= 16; i++) {
     	    	mAnimation.addFrame(frames[i], DURATION);
     		}
-	    	
-    		DbOpenHelper dbOpenHelper = new DbOpenHelper(Main.this);
-		    SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
-		    ContentValues cv = new ContentValues();
-		    String lastDate = new Date().toString();
-		    cv.put(DbOpenHelper.DATE, lastDate);
-		    db.insert(DbOpenHelper.TABLE_NAME, null, cv);
-		    db.close();
-		    if(timer != null)
-		    	timer.cancel();
-		    SetTimer(lastDate);
 		    isOpen = false;
     	}
     	else
@@ -160,18 +141,28 @@ public class Main extends Activity
     /**
      * Retrieves the latest entry and starts timer
      */
-    public void SetTimer(String lastDate)
+    public void SetTimer()
     {
-    	long dte = Date.parse(lastDate);
-    	TextView txt = (TextView) findViewById(R.id.txtCounter);
-        timer = new Timer();
-        TimerTask task = new MyTimerTask(txt, dte);
-        timer.schedule(task, 1, 300);        
+    	DbOpenHelper dbOpenHelper = new DbOpenHelper(Main.this);
+        SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT date FROM history ORDER BY id DESC LIMIT 1", null);
+        int cnt = cursor.getCount();
+        db.close();
+        if (cnt > 0){
+        	cursor.moveToFirst();
+            String lastDate = cursor.getString(0);  
+            long dte = Date.parse(lastDate);
+            TextView txt = (TextView) findViewById(R.id.txtCounter);
+            timer = new Timer();
+            TimerTask task = new MyTimerTask(txt, dte);
+            timer.schedule(task, 1, 300);    
+        }
     }
     
     @Override 
     protected void onStop(){
     	super.onStop(); 
-    	timer.cancel();
+    	if(timer != null)
+    		timer.cancel();
     }
 }
