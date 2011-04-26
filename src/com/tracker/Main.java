@@ -23,7 +23,6 @@ public class Main extends Activity
 	private boolean isOpen;
 	private final static int DURATION = 100;
     private AnimationDrawable mAnimation = null;
-    private static final String TAG = "MainActivity"; 
     
     /** Called when the activity is first created. */
     @Override
@@ -96,40 +95,23 @@ public class Main extends Activity
     	}
     	else
     	{
-	    	BitmapDrawable frame1 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_close); 
-	    	BitmapDrawable frame2 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up1); 
-	    	BitmapDrawable frame3 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up2); 
-	    	BitmapDrawable frame4 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up3); 
-	    	BitmapDrawable frame5 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up4); 
-	    	BitmapDrawable frame6 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up5); 
-	    	BitmapDrawable frame7 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up6);
-	    	BitmapDrawable frame8 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up7);
-	    	BitmapDrawable frame9 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up8);
-	    	BitmapDrawable frame10 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open_up9);
-	    	BitmapDrawable frame11 = 
-	            (BitmapDrawable)getResources().getDrawable(R.drawable.button_open);	    	
+    		BitmapDrawable[] frames = new BitmapDrawable[11];
+    		
+    		frames[0] = (BitmapDrawable)getResources().getDrawable(R.drawable.button_close); 
+    		
+    		// frames 2..10
+    		// button_open_up 1..9
+    		for (int i = 1; i <= 9; i++) {
+    			int resID = getResources().getIdentifier("button_open_up" + i, "drawable", getPackageName());
+    			frames[i] = (BitmapDrawable) getResources().getDrawable(resID);
+    		}
+    		
+    		frames[10] = (BitmapDrawable)getResources().getDrawable(R.drawable.button_open);	    	
 	    	
-	        mAnimation.addFrame(frame1, DURATION);
-	        mAnimation.addFrame(frame2, DURATION);
-	        mAnimation.addFrame(frame3, DURATION);
-	        mAnimation.addFrame(frame4, DURATION);
-	        mAnimation.addFrame(frame5, DURATION);
-	        mAnimation.addFrame(frame6, DURATION);
-	        mAnimation.addFrame(frame7, DURATION);
-	        mAnimation.addFrame(frame8, DURATION);
-	        mAnimation.addFrame(frame9, DURATION);
-	        mAnimation.addFrame(frame10, DURATION);
-	        mAnimation.addFrame(frame11, DURATION);
+    		for (int i = 0; i <= 10; i++) {
+    	    	mAnimation.addFrame(frames[i], DURATION);
+    		}
+    		
 	        isOpen = true;
     	}
     	save_event_imv.setBackgroundDrawable(mAnimation);

@@ -17,8 +17,9 @@ public class DbOpenHelper extends SQLiteOpenHelper{
     public static final String Photo = "photo";
     public static final String Comments = "comments";
     public static final String Rating = "rating";
+    public static final String Position = "position";
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + " (id integer primary key autoincrement, "
-            + Date + " TEXT, " + Name + " TEXT, " + Photo + " TEXT, " + Comments + " TEXT, " + Rating + " NUMERIC)";
+            + Date + " TEXT, " + Name + " TEXT, " + Photo + " TEXT, " + Comments + " TEXT, " + Rating + " NUMERIC, " + Position + " NUMERIC)";
 
 
     public DbOpenHelper(Context context) {
