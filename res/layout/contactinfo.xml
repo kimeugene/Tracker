@@ -3,9 +3,16 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent" android:orientation="vertical">
+    <LinearLayout android:layout_height="wrap_content" android:orientation="horizontal" android:layout_width="match_parent" android:gravity="center" android:id="@+id/topLinearLayout">
+        <LinearLayout android:layout_width="wrap_content" android:id="@+id/linearLayout2" android:layout_height="match_parent">
+            <Button android:layout_height="wrap_content" android:id="@+id/btn_Back" android:text="Back" android:layout_width="100dip"></Button>
+        </LinearLayout>
+        <LinearLayout android:id="@+id/linearLayout3" android:layout_height="match_parent" android:gravity="right" android:layout_width="match_parent">
+            <Button android:layout_gravity="center" android:id="@+id/btn_Save" android:text="SAVE" android:layout_height="wrap_content" android:layout_width="100dip"></Button>
+        </LinearLayout>
+    </LinearLayout>
     <ScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/scrollView1">
         <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
-        
    
         <TextView 
         	android:text="ID" 
@@ -13,6 +20,7 @@
         	android:layout_width="wrap_content" 
         	android:id="@+id/txtView_ID" android:textSize="8pt">
         </TextView>
+        
         
         <TextView 
         	android:text="Date: " 
@@ -37,7 +45,6 @@
         <SeekBar android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/skBar_Rating" android:max="9" android:layout_marginRight="10px" android:layout_marginLeft="5px"></SeekBar>
         <TextView android:layout_width="wrap_content" android:id="@+id/textView3" android:layout_height="wrap_content" android:text="Position: "></TextView>
         <Spinner android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/spinner_Positions"></Spinner>
-        <Button android:layout_height="wrap_content" android:layout_gravity="center" android:text="SAVE" android:id="@+id/btn_Save" android:layout_width="match_parent"></Button>
         </LinearLayout>
     </ScrollView> 
 </LinearLayout>

@@ -1,0 +1,26 @@
+<animation-list 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/sextracker1" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker2" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker3" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker4" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker5" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker6" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker7" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker8" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker9" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker10" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker11" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker12" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker13" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker14" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker15" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker16" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker17" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker18" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker19" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker20" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker21" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker22" android:duration="100"/>
+</animation-list>

@@ -16,10 +16,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
+
 public class Main extends Activity 
 {
 	Timer timer;
 	ImageView save_event_imv;
+	ImageView splash_imv;
+	Button history_btn;
 	private boolean isOpen;
 	private final static int DURATION = 100;
     private AnimationDrawable mAnimation = null;
@@ -32,11 +35,11 @@ public class Main extends Activity
         isOpen = false;
         SetTimer();
         
-        Button history_btn = (Button) findViewById(R.id.history_btn);
+        history_btn = (Button) findViewById(R.id.history_btn);
         history_btn.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
 			    Intent myIntent = new Intent(view.getContext(), History.class);
-			    startActivityForResult(myIntent, 0);
+     		    startActivityForResult(myIntent, 0);
 			}
 	    });
         
@@ -63,7 +66,7 @@ public class Main extends Activity
         mAnimation.setOneShot(true);
     	if(isOpen)
     	{    		
-    		BitmapDrawable[] frames = new BitmapDrawable[17];
+   		BitmapDrawable[] frames = new BitmapDrawable[17];
     		frames[0] = (BitmapDrawable) getResources().getDrawable(R.drawable.button_open);
     		
     		// frames 1,2,3
@@ -111,14 +114,13 @@ public class Main extends Activity
     		for (int i = 0; i <= 10; i++) {
     	    	mAnimation.addFrame(frames[i], DURATION);
     		}
-    		
+   		
 	        isOpen = true;
     	}
     	save_event_imv.setBackgroundDrawable(mAnimation);
         mAnimation.setVisible(false,false);
         mAnimation.start();
 	}
-
     
     /**
      * Retrieves the latest entry and starts timer

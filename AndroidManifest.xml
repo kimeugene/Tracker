@@ -6,14 +6,21 @@
     <uses-sdk android:minSdkVersion="9" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
+	    <activity android:name=".SplashScreen">
+	            <intent-filter>
+	                <action android:name="android.intent.action.MAIN"></action>
+	                <category android:name="android.intent.category.LAUNCHER"></category>
+	            </intent-filter>
+	        </activity>
         <activity android:name="Main"
                   android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.tracker.android.splashscreen.Main"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
         <activity android:name=".History"></activity>
         <activity android:name=".ContactInfo"></activity>
+        
     </application>
 </manifest>

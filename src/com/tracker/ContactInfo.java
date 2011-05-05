@@ -26,13 +26,19 @@ import android.widget.Toast;
 
 public class ContactInfo extends Activity{
 	
-	Date date;
+	String date;
 	ImageView imgView_Photo = null;
+	EditText edTxt_Name;
+	EditText edTxt_Comments;
+	TextView txtView_Rating;
+	SeekBar skBar_Rating;
+	Spinner spinner_Positions;
 	Uri imgUri = null;
 	ArrayAdapter<String> arrayAdapter;
     LayoutInflater inflater;
-    protected Drawable drawable1, drawable2;
-	ViewGroup v;
+    Drawable drawable1;
+    boolean _isEdit = false;
+    int id;
 	
     /** Called when the activity is first created. */
 	@Override
@@ -42,13 +48,37 @@ public class ContactInfo extends Activity{
          
         TextView txtView_ID = (TextView) findViewById(R.id.txtView_ID);    
         TextView txtView_Date = (TextView) findViewById(R.id.txtView_Date);
-        final EditText edTxt_Name = (EditText) findViewById(R.id.edTxt_Name);
+        edTxt_Name = (EditText) findViewById(R.id.edTxt_Name);
         imgView_Photo = (ImageView) findViewById(R.id.imgView_Photo);
-        final EditText edTxt_Comments = (EditText) findViewById(R.id.edTxt_Comments);
-        final TextView txtView_Rating = (TextView) findViewById(R.id.txtView_Rating);
-        final SeekBar skBar_Rating = (SeekBar) findViewById(R.id.skBar_Rating);
-        final Spinner spinner_Positions = (Spinner) findViewById(R.id.spinner_Positions);
-        Button btn_Save = (Button) findViewById(R.id.btn_Save);
+        edTxt_Comments = (EditText) findViewById(R.id.edTxt_Comments);
+        txtView_Rating = (TextView) findViewById(R.id.txtView_Rating);
+        skBar_Rating = (SeekBar) findViewById(R.id.skBar_Rating);
+        spinner_Positions = (Spinner) findViewById(R.id.spinner_Positions);
+        final Button btn_Save = (Button) findViewById(R.id.btn_Save);
+        
+        Button btn_Back = (Button) findViewById(R.id.btn_Back);
+        btn_Back.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+        
+        skBar_Rating.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() 
+        {			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {}			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {}			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				// TODO Auto-generated method stub
+				int prog = progress + 1;
+				txtView_Rating.setText(String.format("Rating: %d", Integer.valueOf(prog)));
+			}
+		});
         
         inflater = getLayoutInflater();
         drawable1 = getResources().getDrawable(R.drawable.icon);
@@ -75,7 +105,16 @@ public class ContactInfo extends Activity{
         };
         spinner_Positions.setAdapter(arrayAdapter);
         
-        int id;
+        //Photo
+        imgView_Photo.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View view) {
+		        Intent chooseFileIntent = new Intent();
+		        chooseFileIntent.setAction(Intent.ACTION_GET_CONTENT);
+		        chooseFileIntent.setType("image/jpeg");
+		        startActivityForResult(chooseFileIntent, 1);
+        	}
+        });
+
         Bundle bg = getIntent().getExtras();
         if(bg != null) //Pokaz sushestvuyushego kontakta
         {
@@ -86,7 +125,7 @@ public class ContactInfo extends Activity{
             if (cursor.getCount() > 0)
             {
             	cursor.moveToFirst();
-            	String Date = cursor.getString(1);
+            	date = cursor.getString(1);
             	String Name = cursor.getString(2);
             	String Photo = cursor.getString(3);
             	String Comments = cursor.getString(4);
@@ -94,7 +133,7 @@ public class ContactInfo extends Activity{
             	int Position = cursor.getInt(6);
             	
             	txtView_ID.setText("ID: " + String.valueOf(id));
-            	txtView_Date.setText("Date: " + Date);
+            	txtView_Date.setText("Date: " + date);
             	edTxt_Name.setText(Name);
             	imgView_Photo.setImageURI(Uri.parse(Photo));
             	edTxt_Comments.setText(Comments);
@@ -102,15 +141,25 @@ public class ContactInfo extends Activity{
             	txtView_Rating.setText(String.format("Rating: %d", Integer.valueOf(skBar_Rating.getProgress() + 1)));
             	spinner_Positions.setSelection(Position);
             	
-            	edTxt_Name.setFocusable(false);
-            	imgView_Photo.setFocusable(false);
-            	edTxt_Comments.setFocusable(false);
-            	skBar_Rating.setEnabled(false);
-            	spinner_Positions.setClickable(false);
-            	btn_Save.setText("Back");
+            	setEditable();
+            	btn_Save.setText("Edit");
             	btn_Save.setOnClickListener(new View.OnClickListener() {
         			public void onClick(View view) {
-        				finish();
+        				if(!_isEdit)
+        				{
+        					_isEdit = true;
+        					btn_Save.setText("Save");
+        					setEditable();        					
+        				}
+        				else
+        				{
+        					if(saveData());
+        					{
+        						finish();
+        						Intent myIntent = new Intent(view.getContext(), Main.class);
+        	    		        startActivityForResult(myIntent, 0);
+        					}
+        				}        				
         			}
         		});
             }
@@ -131,41 +180,16 @@ public class ContactInfo extends Activity{
             db.close();
             
             //Date
-            date = new Date();
-            txtView_Date.setText("Date: " + date.toLocaleString());
-            
-            //Photo
-            imgView_Photo.setOnClickListener(new View.OnClickListener() {
-            	public void onClick(View view) {
-    		        Intent chooseFileIntent = new Intent();
-    		        chooseFileIntent.setAction(Intent.ACTION_GET_CONTENT);
-    		        chooseFileIntent.setType("image/jpeg");
-    		        startActivityForResult(chooseFileIntent, 1);
-            	}
-            });
+            date = new Date().toLocaleString();
+            txtView_Date.setText("Date: " + date);
+                      
             
             //Rating
-            skBar_Rating.setProgress(5);
-            skBar_Rating.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() 
-            {			
-    			@Override
-    			public void onStopTrackingTouch(SeekBar seekBar) {}			
-    			@Override
-    			public void onStartTrackingTouch(SeekBar seekBar) {}			
-    			@Override
-    			public void onProgressChanged(SeekBar seekBar, int progress,
-    					boolean fromUser) {
-    				// TODO Auto-generated method stub
-    				int prog =  progress + 1;
-    				txtView_Rating.setText(String.format("Rating: %d", Integer.valueOf(prog)));
-    			}
-    		});
+            skBar_Rating.setProgress(5);            
             
             //Position
             spinner_Positions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                public void onItemSelected(AdapterView adapterView, View view, int i, long l) {
-                    
-                }
+                public void onItemSelected(AdapterView adapterView, View view, int i, long l) {}
                 public void onNothingSelected(AdapterView adapterView) {}
             });
 
@@ -174,36 +198,56 @@ public class ContactInfo extends Activity{
             */
             btn_Save.setOnClickListener(new View.OnClickListener() {
     			public void onClick(View view) {
-    				
-    				if(edTxt_Name.getText().toString().length() == 0)
+    				if(saveData())
     				{
-    					Toast.makeText(getApplicationContext(), "Fill all data!", 5000).show();
-    					return;
+    					finish();
+	    				Intent myIntent = new Intent(view.getContext(), Main.class);
+	    		        startActivityForResult(myIntent, 0);
     				}
-    				DbOpenHelper dbOpenHelper = new DbOpenHelper(ContactInfo.this);
-    				SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
-    				ContentValues cv = new ContentValues();
-    			    cv.put(DbOpenHelper.Date, date.toLocaleString());
-    			    cv.put(DbOpenHelper.Name, edTxt_Name.getText().toString());
-    			    if(imgUri == null)
-    			    {
-    			    	cv.put(DbOpenHelper.Photo, "No_Photo");
-    			    }
-    			    else
-    			    {
-    			    	cv.put(DbOpenHelper.Photo, imgUri.toString());
-    			    }
-    			    cv.put(DbOpenHelper.Comments, edTxt_Comments.getText().toString());
-    			    cv.put(DbOpenHelper.Rating, skBar_Rating.getProgress() + 1);
-    			    cv.put(DbOpenHelper.Position, spinner_Positions.getSelectedItemPosition());
-    			    db.insert(DbOpenHelper.TABLE_NAME, null, cv);
-    			    db.close();
-    			    Intent myIntent = new Intent(view.getContext(), Main.class);
-                    startActivityForResult(myIntent, 0);
     			}
     	    });
         }
     }
+	
+	void setEditable()
+	{
+		edTxt_Name.setEnabled(_isEdit);
+    	imgView_Photo.setClickable(_isEdit);
+    	edTxt_Comments.setEnabled(_isEdit);
+    	skBar_Rating.setEnabled(_isEdit);
+    	spinner_Positions.setClickable(_isEdit);
+	}
+	
+	boolean saveData()
+	{
+		if(edTxt_Name.getText().toString().length() == 0)
+		{
+			Toast.makeText(getApplicationContext(), "Fill all data!", 5000).show();
+			return false;
+		}
+		DbOpenHelper dbOpenHelper = new DbOpenHelper(ContactInfo.this);
+		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+		ContentValues cv = new ContentValues();
+	    cv.put(DbOpenHelper.Date, date);
+	    cv.put(DbOpenHelper.Name, edTxt_Name.getText().toString());
+	    if(imgUri == null)
+	    {
+	    	cv.put(DbOpenHelper.Photo, "No_Photo");
+	    }
+	    else
+	    {
+	    	cv.put(DbOpenHelper.Photo, imgUri.toString());
+	    }
+	    cv.put(DbOpenHelper.Comments, edTxt_Comments.getText().toString());
+	    cv.put(DbOpenHelper.Rating, skBar_Rating.getProgress() + 1);
+	    cv.put(DbOpenHelper.Position, spinner_Positions.getSelectedItemPosition());
+	    if(_isEdit)
+	    	db.update(DbOpenHelper.TABLE_NAME, cv, DbOpenHelper.ID + " = " + id, null);
+	    else
+	    	db.insert(DbOpenHelper.TABLE_NAME, null, cv);
+	    db.close();	    
+	    return true;
+	}
 	
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
