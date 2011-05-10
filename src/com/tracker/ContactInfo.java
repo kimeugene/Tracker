@@ -62,6 +62,8 @@ public class ContactInfo extends Activity{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				finish();
+				Intent myIntent = new Intent(v.getContext(), Main.class);
+		        startActivityForResult(myIntent, 0);
 			}
 		});
         
@@ -127,7 +129,7 @@ public class ContactInfo extends Activity{
             	cursor.moveToFirst();
             	date = cursor.getString(1);
             	String Name = cursor.getString(2);
-            	String Photo = cursor.getString(3);
+            	imgUri = Uri.parse(cursor.getString(3));
             	String Comments = cursor.getString(4);
             	int Rating = cursor.getInt(5);
             	int Position = cursor.getInt(6);
@@ -135,7 +137,7 @@ public class ContactInfo extends Activity{
             	txtView_ID.setText("ID: " + String.valueOf(id));
             	txtView_Date.setText("Date: " + date);
             	edTxt_Name.setText(Name);
-            	imgView_Photo.setImageURI(Uri.parse(Photo));
+            	imgView_Photo.setImageURI(imgUri);
             	edTxt_Comments.setText(Comments);
             	skBar_Rating.setProgress(Rating - 1);
             	txtView_Rating.setText(String.format("Rating: %d", Integer.valueOf(skBar_Rating.getProgress() + 1)));

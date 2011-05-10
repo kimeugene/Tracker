@@ -1,0 +1,5 @@
+<animation-list
+	xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/sextracker1" android:duration="100"/>
+    <item android:drawable="@drawable/sextracker2" android:duration="100"/>
+</animation-list>
