@@ -5,9 +5,9 @@ public class Contact {
 	String name;
 	String date;
 	int rating;
-	String photo;
+	byte[] photo;
 	
-	public Contact(int ID, String Name, String Date, int Rating, String Photo)
+	public Contact(int ID, String Name, String Date, int Rating, byte[] Photo)
 	{
 		id = ID;
 		name = Name;

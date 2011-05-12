@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 import android.content.Intent;
-
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,7 +15,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable.Callback;
 
 public class Main extends Activity 
 {
@@ -32,6 +30,12 @@ public class Main extends Activity
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        /**
+         * Uncomment this code if you need upgrade Database
+         */
+        //DbOpenHelper dh = new DbOpenHelper(this);
+        //dh.onUpgrade(dh.getReadableDatabase(), 0, 00);        
         
         SetTimer();
         
@@ -52,7 +56,7 @@ public class Main extends Activity
                     @Override
                     public void run() {
                         try {
-                        		sleep(1800);
+                        		sleep(2000);
 							    Intent myIntent = new Intent(getApplicationContext(), ContactInfo.class);
 							    startActivityForResult(myIntent, 0);
                         }
@@ -61,9 +65,6 @@ public class Main extends Activity
 						}
                     }};
                 splashTread.start();
-			    /*if(timer != null)
-			    	timer.cancel();
-			    SetTimer(); */
             }
         });
     }

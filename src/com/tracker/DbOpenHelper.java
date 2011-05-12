@@ -19,7 +19,7 @@ public class DbOpenHelper extends SQLiteOpenHelper{
     public static final String Rating = "rating";
     public static final String Position = "position";
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + " (id integer primary key autoincrement, "
-            + Date + " TEXT, " + Name + " TEXT, " + Photo + " TEXT, " + Comments + " TEXT, " + Rating + " NUMERIC, " + Position + " NUMERIC)";
+            + Date + " TEXT, " + Name + " TEXT, " + Photo + " BLOB, " + Comments + " TEXT, " + Rating + " NUMERIC, " + Position + " NUMERIC)";
 
 
     public DbOpenHelper(Context context) {
@@ -34,5 +34,7 @@ public class DbOpenHelper extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         //To change body of implemented methods use File | Settings | File Templates.
+    	sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME); 
+    	onCreate(sqLiteDatabase);
     }
 }

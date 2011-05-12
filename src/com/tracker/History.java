@@ -41,7 +41,7 @@ public class History extends Activity {
    	 	for(int i = 0; i < count; i++)
    	 	{
    	 		cur.moveToPosition(i);
-   	 		Contact cont = new Contact(cur.getInt(0), cur.getString(2), cur.getString(1), cur.getInt(5), cur.getString(3));   	 		
+   	 		Contact cont = new Contact(cur.getInt(0), cur.getString(2), cur.getString(1), cur.getInt(5), cur.getBlob(3));   	 		
    	 		arr.add(cont);
    	 	}
         db.close();

@@ -1,14 +1,19 @@
 package com.tracker;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import org.apache.http.util.ByteArrayBuffer;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,12 +38,12 @@ public class ContactInfo extends Activity{
 	TextView txtView_Rating;
 	SeekBar skBar_Rating;
 	Spinner spinner_Positions;
-	Uri imgUri = null;
 	ArrayAdapter<String> arrayAdapter;
     LayoutInflater inflater;
     Drawable drawable1;
     boolean _isEdit = false;
     int id;
+    ByteArrayBuffer photoArray = new ByteArrayBuffer(0);
 	
     /** Called when the activity is first created. */
 	@Override
@@ -129,7 +134,7 @@ public class ContactInfo extends Activity{
             	cursor.moveToFirst();
             	date = cursor.getString(1);
             	String Name = cursor.getString(2);
-            	imgUri = Uri.parse(cursor.getString(3));
+            	photoArray.append(cursor.getBlob(3), 0, cursor.getBlob(3).length);
             	String Comments = cursor.getString(4);
             	int Rating = cursor.getInt(5);
             	int Position = cursor.getInt(6);
@@ -137,7 +142,9 @@ public class ContactInfo extends Activity{
             	txtView_ID.setText("ID: " + String.valueOf(id));
             	txtView_Date.setText("Date: " + date);
             	edTxt_Name.setText(Name);
-            	imgView_Photo.setImageURI(imgUri);
+            	ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(photoArray.buffer());
+	            BitmapDrawable photo = new BitmapDrawable(byteArrayInputStream);
+	            imgView_Photo.setImageDrawable(photo);
             	edTxt_Comments.setText(Comments);
             	skBar_Rating.setProgress(Rating - 1);
             	txtView_Rating.setText(String.format("Rating: %d", Integer.valueOf(skBar_Rating.getProgress() + 1)));
@@ -232,14 +239,7 @@ public class ContactInfo extends Activity{
 		ContentValues cv = new ContentValues();
 	    cv.put(DbOpenHelper.Date, date);
 	    cv.put(DbOpenHelper.Name, edTxt_Name.getText().toString());
-	    if(imgUri == null)
-	    {
-	    	cv.put(DbOpenHelper.Photo, "No_Photo");
-	    }
-	    else
-	    {
-	    	cv.put(DbOpenHelper.Photo, imgUri.toString());
-	    }
+	    cv.put(DbOpenHelper.Photo, photoArray.buffer());
 	    cv.put(DbOpenHelper.Comments, edTxt_Comments.getText().toString());
 	    cv.put(DbOpenHelper.Rating, skBar_Rating.getProgress() + 1);
 	    cv.put(DbOpenHelper.Position, spinner_Positions.getSelectedItemPosition());
@@ -259,13 +259,21 @@ public class ContactInfo extends Activity{
 				{
 					if(data != null)
 				 	{
-						imgUri = data.getData();
-						imgView_Photo.setImageURI(imgUri);
-				 	}	
-					break;
+						try {
+							AssetFileDescriptor thePhoto =
+								getContentResolver().openAssetFileDescriptor(data.getData(), "r");
+							FileInputStream fileInputeStream = thePhoto.createInputStream();
+							BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputeStream);
+				            int current = 0;
+				            while ((current = bufferedInputStream.read()) != -1) {
+				            	photoArray.append((byte) current);
+				            }
+				            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(photoArray.buffer());
+				            BitmapDrawable photo = new BitmapDrawable(byteArrayInputStream);
+				            imgView_Photo.setImageDrawable(photo);							
+						} catch (Exception e) {} 
+				 	}
 				}
-				default:
-					break;
 			}
 	}
 }

@@ -1,11 +1,12 @@
 package com.tracker;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.tracker.R;
 import android.content.Context;
-import android.net.Uri;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +60,12 @@ public class CustomAdapter extends ArrayAdapter<Contact> {
             holder.contact_name.setText(cont.name);
             holder.contact_date.setText(cont.date);
             holder.contact_rating.setText(String.valueOf(String.format("Rating: %d", cont.rating)));
-            if(!cont.photo.equals("No_Photo"))
-            	holder.position_img.setImageURI(Uri.parse(cont.photo));
+            if(cont.photo.length > 0)
+            {
+            	ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(cont.photo);
+	            BitmapDrawable photo = new BitmapDrawable(byteArrayInputStream);
+	            holder.position_img.setImageDrawable(photo);
+            }
             else
             	holder.position_img.setBackgroundResource(R.drawable.icon);
         }
