@@ -7,13 +7,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import org.apache.http.util.ByteArrayBuffer;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,19 +35,22 @@ import android.widget.Toast;
 
 public class ContactInfo extends Activity{
 	
-	String date;
-	ImageView imgView_Photo = null;
-	EditText edTxt_Name;
-	EditText edTxt_Comments;
-	TextView txtView_Rating;
-	SeekBar skBar_Rating;
-	Spinner spinner_Positions;
-	ArrayAdapter<String> arrayAdapter;
-    LayoutInflater inflater;
-    Drawable drawable1;
-    boolean _isEdit = false;
-    int id;
-    ByteArrayBuffer photoArray = new ByteArrayBuffer(0);
+	private String date;
+	private ImageView imgView_Photo = null;
+	private EditText edTxt_Name;
+	private EditText edTxt_Comments;
+	private TextView txtView_Rating;
+	private SeekBar skBar_Rating;
+	private Spinner spinner_Positions;
+	private ArrayAdapter<String> arrayAdapter;
+	private LayoutInflater inflater;
+    private Drawable drawable1;
+    private boolean _isEdit = false;
+    private int id;
+    private ByteArrayBuffer photoArray = new ByteArrayBuffer(0);
+    private Uri photoUri = null;
+    private final int deletePhoto = 0;
+    
 	
     /** Called when the activity is first created. */
 	@Override
@@ -270,10 +277,38 @@ public class ContactInfo extends Activity{
 				            }
 				            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(photoArray.buffer());
 				            BitmapDrawable photo = new BitmapDrawable(byteArrayInputStream);
-				            imgView_Photo.setImageDrawable(photo);							
+				            imgView_Photo.setImageDrawable(photo);
+				            photoUri = data.getData();				            
+							showDialog(deletePhoto);
+				            
+				            
 						} catch (Exception e) {} 
 				 	}
 				}
 			}
+	}
+	
+	@Override
+    protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case deletePhoto:
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("You want to remove this photo from gallery?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                	if(photoUri != null)
+                		getContentResolver().delete(photoUri, null, null);
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                    }
+            });
+            builder.setCancelable(false);
+            return builder.create();
+        default:
+        return null;
+        }
 	}
 }

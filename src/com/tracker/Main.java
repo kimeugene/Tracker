@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
+import android.content.ContentValues;
 import android.content.Intent;
 import java.util.Date;
 import java.util.Timer;
@@ -30,12 +31,6 @@ public class Main extends Activity
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
-        /**
-         * Uncomment this code if you need upgrade Database
-         */
-        //DbOpenHelper dh = new DbOpenHelper(this);
-        //dh.onUpgrade(dh.getReadableDatabase(), 0, 00);        
         
         SetTimer();
         
