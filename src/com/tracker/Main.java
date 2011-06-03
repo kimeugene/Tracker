@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.content.ContentValues;
 import android.content.Intent;
 import java.util.Date;
 import java.util.Timer;
@@ -31,8 +33,6 @@ public class Main extends Activity
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
-        SetTimer();
         
         history_btn = (Button) findViewById(R.id.history_btn);
         history_btn.setOnClickListener(new View.OnClickListener() {
@@ -108,9 +108,40 @@ public class Main extends Activity
     
     @Override 
     protected void onStop(){
-    	super.onStop(); 
-    	if(timer != null)
-    		timer.cancel();
+    	super.onStop();     	
     	save_event_imv.setBackgroundResource(R.drawable.button_1);
+    }
+    
+    @Override
+    protected void onResume() {
+       super.onResume();
+       SetTimer();
+       Music.play(this, R.raw.main);
+    }
+
+    @Override
+    protected void onPause() {
+       super.onPause();
+       if(timer != null)
+    	   timer.cancel();
+       Music.stop(this);
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+       super.onCreateOptionsMenu(menu);
+       MenuInflater inflater = getMenuInflater();
+       inflater.inflate(R.menu.menu, menu);
+       return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+       switch (item.getItemId()) {
+       case R.id.settings:
+          startActivity(new Intent(this, Prefs.class));
+          return true;
+       }
+       return false;
     }
 }

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent" 
+    android:orientation="vertical" 
+    android:layout_width="match_parent">
+    <LinearLayout android:id="@+id/topLinearLayout" android:orientation="horizontal" android:gravity="center" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:id="@+id/LinearLayout_cancel">
+            <Button android:layout_width="100dip" android:text="Cancel" android:layout_height="wrap_content" android:id="@+id/btn_Cancel_Option"></Button>
+        </LinearLayout>
+        <LinearLayout android:id="@+id/LinearLayout02" android:gravity="right" android:layout_width="match_parent" android:layout_height="match_parent">
+            <Button android:layout_width="100dip" android:id="@+id/btn_Save_Option" android:text="Save" android:layout_height="wrap_content" android:layout_gravity="center"></Button>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout 
+	    android:id="@+id/linearLayout1" 
+	    android:layout_width="match_parent" 
+	    android:layout_height="wrap_content" 
+	    android:gravity="left" android:layout_marginTop="10dip">
+        <LinearLayout 
+	        android:layout_width="200dip" 
+	        android:layout_gravity="left" 
+	        android:layout_height="match_parent" 
+	        android:id="@+id/linearLayout2" 
+	        android:gravity="center|left">
+	            <TextView 
+		            android:layout_height="wrap_content" 
+		            android:layout_width="wrap_content" 
+		            android:text="Sound on/off" android:textSize="8pt" 
+		            android:id="@+id/txt_Sound_Option" android:paddingLeft="10dip">
+	            </TextView>
+	    </LinearLayout>
+        <LinearLayout 
+	        android:layout_height="match_parent" 
+	        android:id="@+id/linearLayout3" 
+	        android:layout_width="match_parent" 
+	        android:gravity="center">
+	            <CheckBox 
+		            android:layout_height="wrap_content" 
+		            android:layout_width="wrap_content" 
+		            android:id="@+id/chb_Sound_Option">
+	            </CheckBox>
+        </LinearLayout>		    
+    </LinearLayout>
+    <LinearLayout 
+	    android:id="@+id/linearLayout4" 
+	    android:layout_width="match_parent" 
+	    android:layout_height="wrap_content" 
+	    android:gravity="left">
+        <LinearLayout 
+	        android:layout_width="200dip" 
+	        android:layout_gravity="left" 
+	        android:layout_height="match_parent" 
+	        android:id="@+id/linearLayout5" android:gravity="center|left">
+	            <TextView 
+		            android:layout_height="wrap_content" 
+		            android:layout_width="wrap_content" 
+		            android:text="Password protection on/off" android:textSize="8pt" 
+		            android:id="@+id/txt_Password_Protection_Option" android:paddingLeft="10dip">
+	            </TextView>
+	    </LinearLayout>
+        <LinearLayout 
+	        android:layout_height="match_parent" 
+	        android:id="@+id/linearLayout6" 
+	        android:layout_width="match_parent" 
+	        android:gravity="center">
+	            <CheckBox 
+		            android:layout_height="wrap_content" 
+		            android:layout_width="wrap_content" 
+		            android:id="@+id/chb_Password_Protection_Option">
+	            </CheckBox>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout 
+	    android:id="@+id/linearLayout7" 
+	    android:layout_width="match_parent" 
+	    android:layout_height="wrap_content" 
+	    android:gravity="left">
+        <LinearLayout 
+	        android:layout_width="200dip" 
+	        android:layout_gravity="left" 
+	        android:layout_height="match_parent" 
+	        android:id="@+id/linearLayout8" android:gravity="center|left">
+	            <TextView 
+		            android:layout_height="wrap_content" 
+		            android:layout_width="wrap_content" 
+		            android:text="Twitter on/off" android:textSize="8pt" 
+		            android:id="@+id/txt_Twitter_Option" android:paddingLeft="10dip">
+	            </TextView>
+	    </LinearLayout>
+        <LinearLayout 
+	        android:layout_height="match_parent" 
+	        android:id="@+id/linearLayout9" 
+	        android:layout_width="match_parent" 
+	        android:gravity="center">
+	            <CheckBox 
+		            android:layout_height="wrap_content" 
+		            android:layout_width="wrap_content" 
+		            android:id="@+id/chb_Twitter_Option">
+	            </CheckBox>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout 
+	    android:id="@+id/linearLayout10" 
+	    android:layout_width="match_parent" 
+	    android:layout_height="wrap_content" 
+	    android:gravity="left">
+        <LinearLayout 
+	        android:layout_width="200dip" 
+	        android:layout_gravity="left" 
+	        android:layout_height="match_parent" 
+	        android:id="@+id/linearLayout11" android:gravity="center|left">
+	            <TextView 
+		            android:layout_height="wrap_content" 
+		            android:layout_width="wrap_content" 
+		            android:text="Facebook on/off" android:textSize="8pt" 
+		            android:id="@+id/txt_Facebook_Option" android:paddingLeft="10dip">
+	            </TextView>
+	    </LinearLayout>
+        <LinearLayout 
+	        android:layout_height="match_parent" 
+	        android:id="@+id/linearLayout12" 
+	        android:layout_width="match_parent" 
+	        android:gravity="center">
+	            <CheckBox 
+		            android:layout_height="wrap_content" 
+		            android:layout_width="wrap_content" 
+		            android:id="@+id/chb_Facebook_Option">
+	            </CheckBox>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

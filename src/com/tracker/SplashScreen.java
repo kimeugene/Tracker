@@ -28,11 +28,11 @@ public class SplashScreen extends Activity
         /**
          * Uncomment this code if you need upgrade Database
          */
-        DbOpenHelper dh = new DbOpenHelper(this);
+        /*DbOpenHelper dh = new DbOpenHelper(this);
         dh.onUpgrade(dh.getReadableDatabase(), 0, 00);
         addNewContact(new Date().toLocaleString(), "Aleksandra", new byte[0], "comments", 9, 1);
         addNewContact(new Date().toLocaleString(), "Kristina", new byte[0], "comments", 10, 2);
-        addNewContact(new Date().toLocaleString(), "Tanya", new byte[0], "comments", 9, 3);
+        addNewContact(new Date().toLocaleString(), "Tanya", new byte[0], "comments", 9, 3);*/
         
         splash_imv = (ImageView) findViewById(R.id.splash_imv);
         splash_imv.setBackgroundResource(R.animator.splash_anim);
@@ -85,12 +85,12 @@ public class SplashScreen extends Activity
     	DbOpenHelper dh = new DbOpenHelper(this);
         SQLiteDatabase db = dh.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(dh.Date, date);
-        cv.put(dh.Name, name);
-        cv.put(dh.Photo, photo);
-        cv.put(dh.Comments, comments);
-        cv.put(dh.Rating, rating);
-        cv.put(dh.Position, position);
-        db.insert(DbOpenHelper.TABLE_NAME, null, cv);
+        cv.put(DbOpenHelper.Date, date);
+        cv.put(DbOpenHelper.Name, name);
+        cv.put(DbOpenHelper.Photo, photo);
+        cv.put(DbOpenHelper.Comments, comments);
+        cv.put(DbOpenHelper.Rating, rating);
+        cv.put(DbOpenHelper.Position, position);
+        db.insert(DbOpenHelper.TABLE_NAME_HISTORY, null, cv);
     }
 }

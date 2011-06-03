@@ -251,9 +251,9 @@ public class ContactInfo extends Activity{
 	    cv.put(DbOpenHelper.Rating, skBar_Rating.getProgress() + 1);
 	    cv.put(DbOpenHelper.Position, spinner_Positions.getSelectedItemPosition());
 	    if(_isEdit)
-	    	db.update(DbOpenHelper.TABLE_NAME, cv, DbOpenHelper.ID + " = " + id, null);
+	    	db.update(DbOpenHelper.TABLE_NAME_HISTORY, cv, DbOpenHelper.ID + " = " + id, null);
 	    else
-	    	db.insert(DbOpenHelper.TABLE_NAME, null, cv);
+	    	db.insert(DbOpenHelper.TABLE_NAME_HISTORY, null, cv);
 	    db.close();	    
 	    return true;
 	}
@@ -308,7 +308,7 @@ public class ContactInfo extends Activity{
             builder.setCancelable(false);
             return builder.create();
         default:
-        return null;
+        	return null;
         }
 	}
 }
