@@ -22,6 +22,7 @@
         <activity android:name=".History"></activity>
         <activity android:name=".ContactInfo"></activity>
         <activity android:name=".Prefs"></activity>
+        <activity android:name=".Password"></activity>
         
     </application>
 </manifest>
