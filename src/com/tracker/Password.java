@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.InputFilter.LengthFilter;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -34,9 +36,8 @@ public class Password extends Activity implements OnClickListener
 		btn_Cancel.setOnClickListener(this);
 		edTxt_Password1  = (EditText) findViewById(R.id.edTxt_Password1);
 		edTxt_Password2  = (EditText) findViewById(R.id.edTxt_Password2);
-		if(!createPassword){
+		if(!createPassword)
 			edTxt_Password2.setVisibility(View.GONE);
-		}
 	}
 
 	@Override
@@ -45,10 +46,15 @@ public class Password extends Activity implements OnClickListener
 		switch (v.getId()) 
 		{
 			case R.id.btn_password_ok:
-				if(createPassword && !createPassword())
+				if(!checkPasswordLength())
 					return;
-				else if(!checkPassword())
-					return;
+				if(createPassword){
+					if(!createPassword())
+						return;
+				}
+				else 
+					if(!checkPassword())
+						return;
 				Intent myIntent = new Intent(this, Main.class);
 	        	startActivity(myIntent);
 				break;
@@ -62,6 +68,21 @@ public class Password extends Activity implements OnClickListener
 		}
 	}
 	
+	private boolean checkPasswordLength()
+	{
+		if(createPassword)
+		{
+			if((edTxt_Password1.getText().toString().length() > 3) 
+					&& (edTxt_Password2.getText().toString().length() > 3))
+				return true;
+		}
+		else
+			if(edTxt_Password1.getText().toString().length() > 3)
+				return true;		
+		Toast.makeText(getApplicationContext(), "The password should be longer than 4 character!", 5000).show();
+		return false;
+	}
+	
 	private boolean checkPassword()
 	{
 		dbOpenHelper = new DbOpenHelper(this);
@@ -71,7 +92,8 @@ public class Password extends Activity implements OnClickListener
         cursor.moveToLast();
         String pass = cursor.getString(0);
         dataBase.close();
-        if(pass.contains(edTxt_Password1.getText()))
+        String pass1 = edTxt_Password1.getText().toString();
+        if(pass.equals(pass1))
         	return true;
         Toast.makeText(getApplicationContext(), "Wrong password!", 5000).show();
         return false;
@@ -80,9 +102,9 @@ public class Password extends Activity implements OnClickListener
 	private boolean createPassword()
 	{
 		String pass = edTxt_Password1.getText().toString();
-		if(!pass.contains(edTxt_Password2.getText()))
+		if(!pass.equals(edTxt_Password2.getText().toString()))
 		{
-			Toast.makeText(getApplicationContext(), "Wrong password!", 5000).show();
+			Toast.makeText(getApplicationContext(), "The passwords you entered do not match. Please try again.", 5000).show();
 			return false;
 		}
 		dbOpenHelper = new DbOpenHelper(getApplicationContext());
@@ -107,4 +129,6 @@ contentValues.put(OptionEnum.Password_Protection.name(), 1);
 contentValues.put(OptionEnum.Password_Protection.name(), 0);
 dataBase.update(DbOpenHelper.TABLE_NAME_SETTINGS, contentValues, DbOpenHelper.ID + " = " + 1, null);
 dataBase.close();
+
+The password should be longer than 4 character
 */
