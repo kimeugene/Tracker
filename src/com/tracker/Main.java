@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,7 +25,7 @@ public class Main extends Activity
 	ImageView save_event_imv;
 	ImageView splash_imv;
 	Button history_btn;
-	private final static int DURATION = 100;
+	private final static int DURATION = 20;
     private AnimationDrawable mAnimation = null;
     
     /** Called when the activity is first created. */
@@ -99,10 +99,10 @@ public class Main extends Activity
         	cursor.moveToFirst();
             String lastDate = cursor.getString(0);  
             long dte = Date.parse(lastDate);
-            TextView txt = (TextView) findViewById(R.id.txtCounter);
+            LinearLayout llView = (LinearLayout) findViewById(R.id.ll_Counter);
             timer = new Timer();
-            TimerTask task = new MyTimerTask(txt, dte);
-            timer.schedule(task, 1, 300);    
+            TimerTask task = new MyTimerTask(llView, dte);
+            timer.schedule(task, 1, 1000);
         }
     }
     

@@ -57,7 +57,7 @@ public class SplashScreen extends Activity
                     mAnimation.start();
                     
                     while(_active && (waited < _splashTime)) {
-                        sleep(100);
+                        sleep(30);
                         if(_active) {
                             waited += 100;
                         }

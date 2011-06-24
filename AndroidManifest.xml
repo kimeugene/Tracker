@@ -6,7 +6,7 @@
     <uses-sdk android:minSdkVersion="9" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-	    <activity android:name=".SplashScreen">
+	    <activity android:name=".SplashScreen" >
 	            <intent-filter>
 	                <action android:name="android.intent.action.MAIN"></action>
 	                <category android:name="android.intent.category.LAUNCHER"></category>
@@ -25,4 +25,5 @@
         <activity android:name=".Password"></activity>
         
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

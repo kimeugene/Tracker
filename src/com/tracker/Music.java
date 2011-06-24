@@ -12,7 +12,7 @@ public class Music {
       stop(context);
 
       // Start music only if not disabled in preferences
-      if (Prefs.getOption(context, OptionEnum.Sound)) {
+      if (Prefs.getBooleanOption(context, OptionEnum.Sound)) {
          mp = MediaPlayer.create(context, resource);
          mp.setLooping(false);
          mp.start();

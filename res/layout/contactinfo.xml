@@ -1,50 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent" android:orientation="vertical">
-    <LinearLayout android:layout_height="wrap_content" android:orientation="horizontal" android:layout_width="match_parent" android:gravity="center" android:id="@+id/topLinearLayout">
-        <LinearLayout android:layout_width="wrap_content" android:id="@+id/linearLayout2" android:layout_height="match_parent">
-            <Button android:layout_height="wrap_content" android:id="@+id/btn_Back" android:text="Back" android:layout_width="100dip"></Button>
+  android:background="@drawable/contact_fon" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout 
+    	android:orientation="horizontal" 
+    	android:layout_width="match_parent" 
+    	android:gravity="center" 
+    	android:id="@+id/topLinearLayout" 
+    	android:layout_marginTop="50dp" android:layout_height="wrap_content">
+        <LinearLayout 
+        	android:layout_width="wrap_content" 
+        	android:layout_height="match_parent" 
+        	android:id="@+id/contactInfo_ll_BackButton">
+            <Button 
+            	android:id="@+id/contactInfo_btn_Back"
+            	android:background="@drawable/contact_btn_back" 
+            	android:layout_width="140dp" android:layout_height="40dp">
+            </Button>
         </LinearLayout>
-        <LinearLayout android:id="@+id/linearLayout3" android:layout_height="match_parent" android:gravity="right" android:layout_width="match_parent">
-            <Button android:layout_gravity="center" android:id="@+id/btn_Save" android:text="SAVE" android:layout_height="wrap_content" android:layout_width="100dip"></Button>
+        <LinearLayout 
+        	android:layout_height="match_parent" 
+        	android:gravity="right" 
+        	android:layout_width="match_parent" 
+        	android:id="@+id/contactInfo_ll_SaveButton">
+            <Button 
+            	android:layout_gravity="center"
+            	android:background="@drawable/contact_btn_save" 
+            	android:id="@+id/contactInfo_btn_Save" 
+            	android:layout_width="140dp" android:layout_height="40dp">
+            </Button>
         </LinearLayout>
     </LinearLayout>
-    <ScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/scrollView1">
-        <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
-   
-        <TextView 
-        	android:text="ID" 
+    <ScrollView 
+    	android:layout_width="match_parent" 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/scrollView1" 
+    	android:layout_marginTop="15dp">
+        <LinearLayout 
+        	android:id="@+id/linearLayout1" 
+        	android:layout_width="match_parent" 
+        	android:layout_height="match_parent" 
+        	android:orientation="vertical">
+            <LinearLayout 
+            	android:layout_width="match_parent" 
+            	android:layout_height="wrap_content" 
+            	android:id="@+id/contactInfo_ll_ID">
+                <TextView 
+                	android:textSize="8pt" 
+                	android:layout_width="wrap_content"
+                	android:id="@+id/contactInfo_txtView_ID" 
+                	android:background="@drawable/contact_number" 
+                	android:layout_height="25dp" android:paddingLeft="75dp">
+                </TextView>
+            </LinearLayout>
+            <LinearLayout 
+            	android:layout_width="match_parent" 
+            	android:layout_height="wrap_content" 
+            	android:id="@+id/contactInfo_ll_Date">
+                <TextView 
+                	android:textSize="8pt" 
+                	android:layout_width="wrap_content" 
+                	android:id="@+id/contactInfo_txtView_Date" 
+                	android:layout_height="25dp" 
+                	android:background="@drawable/contact_date" 
+                	android:layout_marginTop="10dp" 
+                	android:paddingLeft="75dp">
+                </TextView>
+            </LinearLayout>
+            <LinearLayout 
+            	android:layout_width="match_parent" 
+            	android:layout_height="wrap_content" 
+            	android:id="@+id/contactInfo_ll_Name" 
+            	android:layout_marginTop="10dp">
+                <ImageView 
+                	android:background="@drawable/contact_lbl_name" 
+                	android:layout_width="100dp" android:id="@+id/contactInfo_imgView_Name" android:layout_height="25dp">
+                </ImageView>
+                <EditText 
+                	android:layout_width="match_parent"
+                	android:background="@drawable/contact_tbx_name" 
+                	android:maxLength="12"
+                	android:maxLines="1"
+                	android:textSize="7pt"
+                	android:paddingLeft="15dp" 
+                	android:layout_height="match_parent" android:id="@+id/contactInfo_edTxt_Name">
+                </EditText>
+            </LinearLayout>
+        <LinearLayout 
         	android:layout_height="wrap_content" 
-        	android:layout_width="wrap_content" 
-        	android:id="@+id/txtView_ID" android:textSize="8pt">
-        </TextView>
-        
-        
-        <TextView 
-        	android:text="Date: " 
-        	android:layout_height="wrap_content" 
-        	android:layout_width="wrap_content" 
-        	android:id="@+id/txtView_Date" android:textSize="8pt">
-        </TextView>
-        <TextView android:layout_width="wrap_content" android:id="@+id/textView1" android:layout_height="wrap_content" android:text="Name: "></TextView>
-                
-        <EditText 
-        	android:layout_height="wrap_content" 
-        	android:id="@+id/edTxt_Name"
-        	android:layout_width="match_parent">
-        </EditText>
-        <TextView android:id="@+id/textView4" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Photo: "></TextView>
-        <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/llPhoto" android:gravity="center">
-            <ImageView android:src="@drawable/icon" android:id="@+id/imgView_Photo" android:layout_height="150dip" android:layout_width="120dip"></ImageView>
+        	android:layout_width="match_parent" 
+        	android:id="@+id/contactInfo_ll_Photo" 
+        	android:layout_marginTop="10dp">
+            <LinearLayout 
+            	android:layout_width="wrap_content" 
+            	android:layout_height="match_parent" 
+            	android:id="@+id/contactInfo_ll_Photo1">
+                <ImageView 
+                	android:id="@+id/contactInfo_imgView_Photo1" 
+                	android:background="@drawable/contact_lbl_photo" 
+                	android:layout_marginTop="20dp" android:layout_width="100dp" android:layout_height="40dp">
+                </ImageView>
+            </LinearLayout>
+            <LinearLayout 
+            	android:layout_height="match_parent" 
+            	android:id="@+id/contactInfo_ll_Photo2" 
+            	android:layout_width="match_parent" 
+            	android:gravity="center">
+                <ImageView 
+                	android:src="@drawable/icon" 
+                	android:id="@+id/contactInfo_imgView_Photo2" 
+                	android:layout_width="200dp" 
+                	android:layout_height="120dp">
+                </ImageView>
+            </LinearLayout>
         </LinearLayout>
-        <TextView android:layout_width="wrap_content" android:id="@+id/textView2" android:layout_height="wrap_content" android:text="Comments: "></TextView>
-        <EditText android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/edTxt_Comments"></EditText>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:id="@+id/txtView_Rating" android:textSize="8pt" android:text="Rating: 5"></TextView>
-        <SeekBar android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/skBar_Rating" android:max="9" android:layout_marginRight="10px" android:layout_marginLeft="5px"></SeekBar>
-        <TextView android:layout_width="wrap_content" android:id="@+id/textView3" android:layout_height="wrap_content" android:text="Position: "></TextView>
-        <Spinner android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/spinner_Positions"></Spinner>
+        <LinearLayout 
+        	android:layout_width="match_parent" 
+        	android:layout_height="wrap_content" 
+        	android:id="@+id/contactInfo_ll_Comments" 
+        	android:layout_marginTop="10dp">
+            <ImageView 
+            	android:background="@drawable/contact_lbl_comments" 
+            	android:layout_width="100dp" android:id="@+id/contactInfo_imgView_Comments" android:layout_height="30dp">
+            </ImageView>
+            <EditText 
+            	android:layout_width="match_parent" 
+            	android:background="@drawable/contact_tbx_comments" 
+            	android:layout_marginLeft="10dp" 
+            	android:textSize="7pt"
+                android:paddingLeft="15dp" 
+                android:paddingRight="15dp" 
+                android:paddingTop="15dp" 
+                android:paddingBottom="15dp" 
+                android:maxLines="3"
+            	android:gravity="left|top" android:layout_height="100dp" android:id="@+id/contactInfo_edTxt_Comments">
+            </EditText>
+        </LinearLayout>
+        <LinearLayout 
+        	android:layout_width="match_parent" 
+        	android:layout_height="wrap_content" 
+        	android:layout_marginTop="10dp"
+        	android:id="@+id/contactInfo_ll_Rating">
+            <ImageView 
+            	android:background="@drawable/contact_lbl_rating" 
+            	android:layout_width="100dp" android:id="@+id/contactInfo_imgView_lblRating" android:layout_height="30dp">
+            </ImageView>
+            <TextView 
+            	android:layout_width="wrap_content" 
+            	android:background="@drawable/contact_tbx_rating" 
+            	android:layout_marginLeft="10dp" 
+            	android:gravity="center" android:id="@+id/contactInfo_txtView_valueRating" android:layout_height="30dp">
+            </TextView>
+            <SeekBar 
+            	android:layout_width="match_parent" 
+            	android:layout_marginRight="10px" 
+            	android:max="9" 
+            	android:layout_height="wrap_content" 
+            	android:layout_marginLeft="10dp" android:id="@+id/contactInfo_skBar_Rating">
+            </SeekBar>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent" 
+        	android:layout_height="wrap_content" 
+        	android:id="@+id/contactInfo_ll_Positions" 
+        	android:layout_marginTop="10dp">
+            <Spinner 
+            	android:layout_width="match_parent" 
+            	android:id="@+id/contactInfo_spinner_Positions" 
+            	android:background="@drawable/contact_positions" android:layout_height="50dp">
+            </Spinner>
+        </LinearLayout>
         </LinearLayout>
     </ScrollView> 
 </LinearLayout>

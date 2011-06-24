@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.text.InputFilter.LengthFilter;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -87,7 +85,7 @@ public class Password extends Activity implements OnClickListener
 	{
 		dbOpenHelper = new DbOpenHelper(this);
     	dataBase = dbOpenHelper.getWritableDatabase();
-        Cursor cursor = dataBase.rawQuery("Select password from " 
+        Cursor cursor = dataBase.rawQuery("Select " + OptionEnum.AppPassword + " from " 
         		+ DbOpenHelper.TABLE_NAME_SETTINGS, null);
         cursor.moveToLast();
         String pass = cursor.getString(0);
@@ -110,7 +108,7 @@ public class Password extends Activity implements OnClickListener
 		dbOpenHelper = new DbOpenHelper(getApplicationContext());
 		dataBase = dbOpenHelper.getWritableDatabase();
 		contentValues = new ContentValues();
-		contentValues.put("password", pass);
+		contentValues.put(OptionEnum.AppPassword.name(), pass);
 		contentValues.put(OptionEnum.First_Load.name(), 0);
 		contentValues.put(OptionEnum.Password_Protection.name(), 1);
 		dataBase.update(DbOpenHelper.TABLE_NAME_SETTINGS, contentValues, DbOpenHelper.ID + " = " + 1, null);
@@ -118,17 +116,3 @@ public class Password extends Activity implements OnClickListener
 		return true;
 	}
 }
-
-
-/*
-dbOpenHelper = new DbOpenHelper(getApplicationContext());
-dataBase = dbOpenHelper.getWritableDatabase();
-contentValues = new ContentValues();
-contentValues.put(OptionEnum.First_Load.name(), 0);
-contentValues.put(OptionEnum.Password_Protection.name(), 1);
-contentValues.put(OptionEnum.Password_Protection.name(), 0);
-dataBase.update(DbOpenHelper.TABLE_NAME_SETTINGS, contentValues, DbOpenHelper.ID + " = " + 1, null);
-dataBase.close();
-
-The password should be longer than 4 character
-*/

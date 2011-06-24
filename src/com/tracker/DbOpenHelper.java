@@ -22,10 +22,24 @@ public class DbOpenHelper extends SQLiteOpenHelper{
     public static final String Position = "position";
     public static final String Password = "Password";
     private static final String CREATE_TABLE_HISTORY = "create table " + TABLE_NAME_HISTORY + " (id integer primary key autoincrement, "
-            						+ Date + " TEXT, " + Name + " TEXT, " + Photo + " BLOB, " + Comments + " TEXT, " + Rating + " NUMERIC, " + Position + " NUMERIC)";
+            						+ Date + " TEXT, " 
+            						+ Name + " TEXT, " 
+            						+ Photo + " BLOB, " 
+            						+ Comments + " TEXT, " 
+            						+ Rating + " NUMERIC, " 
+            						+ Position + " NUMERIC)";
     private static final String CREATE_TABLE_SETTINGS = "create table " + TABLE_NAME_SETTINGS + " (id integer primary key autoincrement, "
-    								+ OptionEnum.First_Load + " NUMERIC, " + OptionEnum.Password_Protection + " NUMERIC, " + Password + " TEXT, " + OptionEnum.Sound + " NUMERIC, " + OptionEnum.Twitter + " NUMERIC, " + OptionEnum.Facebook + " NUMERIC)";
-
+    								+ OptionEnum.First_Load + " NUMERIC, " 
+    								+ OptionEnum.Password_Protection + " NUMERIC, "
+    								+ OptionEnum.AppPassword + " TEXT, "
+    								+ OptionEnum.Sound + " NUMERIC, "
+    								+ OptionEnum.Twitter + " NUMERIC, " 
+    								+ OptionEnum.LoginOnTwitter + " TEXT, " 
+    								+ OptionEnum.PasswordOnTwitter + " TEXT, " 
+    								+ OptionEnum.Facebook + " NUMERIC, "
+    								+ OptionEnum.LoginOnFacebook + " TEXT, " 
+    								+ OptionEnum.PasswordOnFacebook + " TEXT, "
+    								+ OptionEnum.StatusMessage + " TEXT)";
 
     public DbOpenHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -38,10 +52,15 @@ public class DbOpenHelper extends SQLiteOpenHelper{
         ContentValues cv = new ContentValues();
         cv.put(OptionEnum.First_Load.name(), 1);
         cv.put(OptionEnum.Password_Protection.name(), 1);
-        cv.put(Password, "");
+        cv.put(OptionEnum.AppPassword.name(), "");
         cv.put(OptionEnum.Sound.name(), 1);
-        cv.put(OptionEnum.Twitter.name(), 1);
-        cv.put(OptionEnum.Facebook.name(), 1);
+        cv.put(OptionEnum.Twitter.name(), 0);
+        cv.put(OptionEnum.LoginOnTwitter.name(), "");
+        cv.put(OptionEnum.PasswordOnTwitter.name(), "");
+        cv.put(OptionEnum.Facebook.name(), 0);
+        cv.put(OptionEnum.LoginOnFacebook.name(), "");
+        cv.put(OptionEnum.PasswordOnFacebook.name(), "");
+        cv.put(OptionEnum.StatusMessage.name(), "I made it!");
         sqLiteDatabase.insert(DbOpenHelper.TABLE_NAME_SETTINGS, null, cv);
     }
 

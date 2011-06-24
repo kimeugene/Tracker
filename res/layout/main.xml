@@ -5,25 +5,31 @@
     android:layout_height="fill_parent">
     
     <Button android:id="@+id/history_btn" 
-        android:layout_width="100px" 
-        android:textSize="18px" 
+        android:layout_width="100dp" 
+        android:textSize="18dp" 
         android:text="History" 
-        android:layout_height="55px">
+        android:layout_height="55dp">
     </Button>
     
     <ImageView
         android:id="@+id/save_event_imv"
         android:layout_centerInParent="true"
-    	android:layout_height="100px"
-    	android:layout_width="100px"/>
+    	android:layout_height="100dp"
+    	android:layout_width="100dp"/>
         
     
         
-    <TextView 
-    	android:id="@+id/txtCounter" 
+    <LinearLayout
+    	android:id="@+id/ll_Counter" 
     	android:layout_alignParentRight="true" 
-    	android:layout_height="wrap_content" 
-    	android:layout_width="100px"
-    	android:text="" android:textSize="14px">
-    </TextView>
+    	android:layout_width="150dp" android:background="@drawable/counter_fon" android:layout_height="55dp">
+        <ImageView android:id="@+id/img_day1" android:layout_width="10dp" android:background="@drawable/counter_1" android:layout_height="35dp" android:layout_marginLeft="26dp" android:layout_marginTop="5dp"></ImageView>
+        <ImageView android:id="@+id/img_day2" android:layout_width="10dp" android:background="@drawable/counter_1" android:layout_height="35dp" android:layout_marginLeft="1dp" android:layout_marginTop="5dp"></ImageView>
+        <ImageView android:id="@+id/img_hour1" android:layout_width="10dp" android:background="@drawable/counter_1" android:layout_height="35dp" android:layout_marginLeft="2dp" android:layout_marginTop="5dp"></ImageView>
+        <ImageView android:id="@+id/img_hour2" android:layout_width="10dp" android:background="@drawable/counter_1" android:layout_height="35dp" android:layout_marginLeft="1dp" android:layout_marginTop="5dp"></ImageView>
+        <ImageView android:id="@+id/img_minute1" android:layout_width="10dp" android:background="@drawable/counter_1" android:layout_height="35dp" android:layout_marginLeft="2dp" android:layout_marginTop="5dp"></ImageView>
+        <ImageView android:id="@+id/img_minute2" android:layout_width="10dp" android:background="@drawable/counter_1" android:layout_height="35dp" android:layout_marginLeft="1dp" android:layout_marginTop="5dp"></ImageView>
+        <ImageView android:id="@+id/img_second1" android:layout_width="10dp" android:background="@drawable/counter_1" android:layout_height="35dp" android:layout_marginLeft="2dp" android:layout_marginTop="5dp"></ImageView>
+        <ImageView android:id="@+id/img_second2" android:layout_width="10dp" android:background="@drawable/counter_1" android:layout_height="35dp" android:layout_marginLeft="1dp" android:layout_marginTop="5dp"></ImageView>
+    </LinearLayout>
 </RelativeLayout>
