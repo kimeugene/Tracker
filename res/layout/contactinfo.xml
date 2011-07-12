@@ -6,16 +6,18 @@
     	android:orientation="horizontal" 
     	android:layout_width="match_parent" 
     	android:gravity="center" 
-    	android:id="@+id/topLinearLayout" 
-    	android:layout_marginTop="50dp" android:layout_height="wrap_content">
+    	android:id="@+id/contactInfo_ll_Top" 
+    	android:layout_marginTop="50dp" 
+    	android:layout_height="wrap_content">
         <LinearLayout 
         	android:layout_width="wrap_content" 
         	android:layout_height="match_parent" 
         	android:id="@+id/contactInfo_ll_BackButton">
             <Button 
             	android:id="@+id/contactInfo_btn_Back"
-            	android:background="@drawable/contact_btn_back" 
-            	android:layout_width="140dp" android:layout_height="40dp">
+            	android:layout_width="140dp" 
+            	android:layout_height="40dp" 
+            	android:background="@drawable/btn_back">
             </Button>
         </LinearLayout>
         <LinearLayout 
@@ -25,9 +27,9 @@
         	android:id="@+id/contactInfo_ll_SaveButton">
             <Button 
             	android:layout_gravity="center"
-            	android:background="@drawable/contact_btn_save" 
             	android:id="@+id/contactInfo_btn_Save" 
-            	android:layout_width="140dp" android:layout_height="40dp">
+            	android:layout_width="140dp" 
+            	android:layout_height="40dp" android:background="@drawable/btn_save">
             </Button>
         </LinearLayout>
     </LinearLayout>
@@ -107,10 +109,9 @@
             	android:layout_width="match_parent" 
             	android:gravity="center">
                 <ImageView 
-                	android:src="@drawable/icon" 
                 	android:id="@+id/contactInfo_imgView_Photo2" 
                 	android:layout_width="200dp" 
-                	android:layout_height="120dp">
+                	android:layout_height="120dp" android:background="@drawable/no_photo">
                 </ImageView>
             </LinearLayout>
         </LinearLayout>

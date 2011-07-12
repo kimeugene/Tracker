@@ -2,22 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent" 
     android:orientation="vertical" 
-    android:layout_width="match_parent">
+    android:layout_width="match_parent" android:background="@drawable/settings_fon">
     <LinearLayout 
     	android:id="@+id/topLinearLayout" 
     	android:orientation="horizontal" 
     	android:gravity="center" 
     	android:layout_width="match_parent" 
-    	android:layout_height="wrap_content">
+    	android:layout_height="wrap_content" 
+    	android:layout_marginTop="50dp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp">
         <LinearLayout 
         	android:layout_width="wrap_content" 
         	android:layout_height="match_parent" 
         	android:id="@+id/LinearLayout_cancel">
             <Button 
-            	android:layout_width="100dp" 
-            	android:text="Cancel" 
-            	android:layout_height="wrap_content" 
-            	android:id="@+id/btn_Cancel_Option">
+            	android:text="" 
+            	android:id="@+id/btn_Cancel_Option" 
+            	android:background="@drawable/btn_cancel" 
+            	android:layout_width="140dp" 
+            	android:layout_height="40dp">
             </Button>
         </LinearLayout>
         <LinearLayout 
@@ -26,11 +28,12 @@
 	        android:layout_width="match_parent" 
 	        android:layout_height="match_parent">
             <Button 
-            	android:layout_width="100dp" 
             	android:id="@+id/btn_Save_Option" 
-            	android:text="Save" 
-            	android:layout_height="wrap_content" 
-            	android:layout_gravity="center">
+            	android:text="" 
+            	android:layout_gravity="center" 
+            	android:background="@drawable/btn_save" 
+            	android:layout_width="140dp" 
+            	android:layout_height="40dp">
             </Button>
         </LinearLayout>
     </LinearLayout>
@@ -41,7 +44,7 @@
 	        android:id="@+id/linearLayout13" 
 	        android:layout_width="match_parent" 
 	        android:layout_height="match_parent" 
-	        android:orientation="vertical">
+	        android:orientation="vertical" android:layout_margin="5dp">
             <LinearLayout 
             	android:layout_marginTop="10dp" 
             	android:gravity="left" 
@@ -50,17 +53,8 @@
             	android:layout_width="match_parent">
                 <LinearLayout 
                 	android:gravity="center|left" 
-                	android:layout_height="match_parent" 
                 	android:id="@+id/linearLayout2" 
-                	android:layout_width="200dp" 
-                	android:layout_gravity="left">
-                    <TextView android:text="Sound on/off" 
-                    	android:textSize="8pt" 
-                    	android:layout_width="wrap_content" 
-                    	android:id="@+id/txt_Sound_Option" 
-                    	android:layout_height="wrap_content" 
-                    	android:paddingLeft="10dp">
-                    </TextView>
+                	android:layout_gravity="left" android:background="@drawable/settings_sound" android:layout_height="40dp" android:layout_width="250dp">
                 </LinearLayout>
                 <LinearLayout 
                 	android:gravity="center" 
@@ -78,21 +72,11 @@
             	android:gravity="left" 
             	android:layout_height="wrap_content" 
             	android:id="@+id/linearLayout4" 
-            	android:layout_width="match_parent">
+            	android:layout_width="match_parent" android:layout_marginTop="10dp">
                 <LinearLayout 
                 	android:gravity="center|left" 
-                	android:layout_height="match_parent" 
                 	android:id="@+id/linearLayout5" 
-                	android:layout_width="200dp" 
-                	android:layout_gravity="left">
-                    <TextView 
-                    	android:text="Password protection on/off" 
-                    	android:textSize="8pt" 
-                    	android:layout_width="wrap_content" 
-                    	android:id="@+id/txt_Password_Protection_Option" 
-                    	android:layout_height="wrap_content" 
-                    	android:paddingLeft="10dp">
-                    </TextView>
+                	android:layout_gravity="left" android:background="@drawable/settings_password_protection" android:layout_width="250dp" android:layout_height="40dp">
                 </LinearLayout>
                 <LinearLayout 
                 	android:gravity="center" 
@@ -110,21 +94,11 @@
             	android:gravity="left" 
             	android:layout_height="wrap_content" 
             	android:id="@+id/linearLayout7" 
-            	android:layout_width="match_parent">
+            	android:layout_width="match_parent" android:layout_marginTop="10dp">
                 <LinearLayout 
                 	android:gravity="center|left" 
-                	android:layout_height="match_parent" 
                 	android:id="@+id/linearLayout8" 
-                	android:layout_width="200dp" 
-                	android:layout_gravity="left">
-                    <TextView 
-                    	android:text="Twitter on/off" 
-                    	android:textSize="8pt" 
-                    	android:layout_width="wrap_content" 
-                    	android:id="@+id/txt_Twitter_Option" 
-                    	android:layout_height="wrap_content" 
-                    	android:paddingLeft="10dp">
-                    </TextView>
+                	android:layout_gravity="left" android:background="@drawable/settings_twitter" android:layout_width="250dp" android:layout_height="40dp">
                 </LinearLayout>
                 <LinearLayout 
                 	android:gravity="center" 
@@ -138,54 +112,25 @@
                     </CheckBox>
                 </LinearLayout>
             </LinearLayout>
-            <TextView 
-            	android:layout_marginLeft="25dp" 
-            	android:text="Login" 
-            	android:layout_width="wrap_content" 
-            	android:id="@+id/options_txtView_TwitterLogin" 
-            	android:layout_height="wrap_content">
-            </TextView>
-            <EditText 
-            	android:layout_marginLeft="25dp"
-				android:layout_width="match_parent" 
-				android:layout_marginRight="25dp"
-				android:layout_height="wrap_content" 
-				android:id="@+id/options_edTxt_TwitterLogin">
-			</EditText>
-            <TextView 
-            	android:layout_marginLeft="25dp" 
-            	android:text="Password" 
-            	android:layout_width="wrap_content" 
-            	android:id="@+id/options_txtView_TwitterPassword" 
-            	android:layout_height="wrap_content">
-            </TextView>
-            <EditText 
-            	android:inputType="textPassword" 
-            	android:layout_marginLeft="25dp" 
-            	android:layout_width="match_parent" 
-            	android:layout_marginRight="25dp" 
-            	android:layout_height="wrap_content" 
-            	android:id="@+id/options_edTxt_TwitterPassword">
-            </EditText>
+            <LinearLayout 
+            	android:id="@+id/linearLayout14" 
+            	android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="10dp">
+                <ImageView android:background="@drawable/settings_login" android:layout_height="40dp" android:layout_width="100dp" android:id="@+id/options_imgView_TwitterLogin" android:layout_marginLeft="50dp"></ImageView>
+                <EditText android:background="@drawable/settings_edtxt_login_password" android:text="" android:layout_width="match_parent" android:id="@+id/options_edTxt_TwitterLogin" android:layout_height="match_parent" android:textColor="@color/White"></EditText>
+            </LinearLayout>
+            <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout15" android:layout_width="match_parent" android:layout_marginTop="5dp">
+                <ImageView android:layout_height="40dp" android:layout_width="100dp" android:id="@+id/options_imgView_TwitterPassword" android:background="@drawable/settings_password" android:layout_marginLeft="50dp"></ImageView>
+                <EditText android:background="@drawable/settings_edtxt_login_password" android:text="" android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/options_edTxt_TwitterPassword" android:inputType="textPassword" android:textColor="@color/White"></EditText>
+            </LinearLayout>
             <LinearLayout 
             	android:gravity="left" 
             	android:layout_height="wrap_content" 
             	android:id="@+id/linearLayout10" 
-            	android:layout_width="match_parent">
+            	android:layout_width="match_parent" android:layout_marginTop="10dp">
                 <LinearLayout 
                 	android:gravity="center|left" 
-	                android:layout_height="match_parent" 
 	                android:id="@+id/linearLayout11" 
-	                android:layout_width="200dp" 
-	                android:layout_gravity="left">
-                    <TextView 
-	                    android:text="Facebook on/off" 
-	                    android:textSize="8pt" 
-	                    android:layout_width="wrap_content" 
-	                    android:id="@+id/txt_Facebook_Option" 
-	                    android:layout_height="wrap_content" 
-	                    android:paddingLeft="10dp">
-                	</TextView>
+	                android:layout_gravity="left" android:layout_width="250dp" android:background="@drawable/settings_facebook" android:layout_height="40dp">
                 </LinearLayout>
                 <LinearLayout 
                 	android:gravity="center" 
@@ -199,48 +144,20 @@
                     </CheckBox>
                 </LinearLayout>
             </LinearLayout>
-            <TextView 
-            	android:layout_marginLeft="25dp" 
-            	android:text="Login" 
-            	android:layout_width="wrap_content" 
-            	android:id="@+id/options_txtView_FacebookLogin" 
-            	android:layout_height="wrap_content">
-            </TextView>
-            <EditText 
-            	android:layout_marginLeft="25dp" 
-            	android:layout_width="match_parent" 
-            	android:layout_marginRight="25dp" 
-            	android:layout_height="wrap_content" 
-            	android:id="@+id/options_edTxt_FacebookLogin">
-            </EditText>
-            <TextView 
-            	android:layout_marginLeft="25dp" 
-            	android:text="Password" 
-            	android:layout_width="wrap_content" 
-            	android:id="@+id/options_txtView_FacebookPassword" 
-            	android:layout_height="wrap_content">
-            	</TextView>
-            <EditText 
-            	android:layout_marginLeft="25dp" 
-            	android:layout_width="match_parent" 
-            	android:inputType="textPassword" 
-            	android:layout_marginRight="25dp" 
-            	android:layout_height="wrap_content" 
-            	android:id="@+id/options_edTxt_FacebookPassword">
-            </EditText>
-            <TextView 
-            	android:layout_height="wrap_content" 
-            	android:layout_marginLeft="25dp" 
-            	android:text="Status message" 
-            	android:id="@+id/options_txtView_StatusMessage" 
-            	android:layout_width="wrap_content">
-            </TextView>
-            <EditText 
-            	android:id="@+id/options_edTxt_StatusMessage" 
-            	android:layout_marginRight="25dp" 
-            	android:layout_marginLeft="25dp" 
-            	android:layout_width="match_parent" android:layout_height="100dp">
-            </EditText>
+            <LinearLayout 
+            	android:id="@+id/linearLayout14" 
+            	android:layout_width="match_parent" android:layout_height="40dp" android:layout_marginTop="10dp" android:layout_marginLeft="50dp">
+                <ImageView android:background="@drawable/settings_login" android:layout_height="40dp" android:layout_width="100dp" android:id="@+id/options_imgView_FacebookLogin"></ImageView>
+                <EditText android:background="@drawable/settings_edtxt_login_password" android:text="" android:layout_width="match_parent" android:id="@+id/options_edTxt_FacebookLogin" android:layout_height="match_parent" android:textColor="@color/White"></EditText>
+            </LinearLayout>
+            <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout15" android:layout_width="match_parent" android:layout_marginTop="5dp" android:layout_marginLeft="50dp">
+                <ImageView android:layout_height="40dp" android:layout_width="100dp" android:id="@+id/options_imgView_FacebookPassword" android:background="@drawable/settings_password"></ImageView>
+                <EditText android:background="@drawable/settings_edtxt_login_password" android:text="" android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/options_edTxt_FacebookPassword" android:inputType="textPassword" android:textColor="@color/White"></EditText>
+            </LinearLayout>
+            <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout16" android:layout_width="match_parent" android:layout_marginTop="10dp" android:layout_marginLeft="50dp">
+                <ImageView android:layout_height="wrap_content" android:id="@+id/options_imgView_StatusMessage" android:layout_width="wrap_content" android:background="@drawable/settings_status_message"></ImageView>
+                <EditText android:text="" android:layout_width="match_parent" android:id="@+id/options_edTxt_StatusMessage" android:layout_height="match_parent" android:background="@drawable/settings_edtxt_status_message" android:textColor="@color/White"></EditText>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

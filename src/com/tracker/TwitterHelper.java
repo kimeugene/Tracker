@@ -5,7 +5,6 @@ import java.util.Map;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
-import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.internal.http.HttpClientImpl;
 import twitter4j.internal.http.HttpParameter;

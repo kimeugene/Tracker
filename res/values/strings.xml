@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, main!</string>
     <string name="app_name">Tracker</string>
+    <color name="White">#ffffff</color>
 </resources>

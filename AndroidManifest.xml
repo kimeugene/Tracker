@@ -23,6 +23,7 @@
         <activity android:name=".ContactInfo"></activity>
         <activity android:name=".Prefs"></activity>
         <activity android:name=".Password"></activity>
+        <activity android:name=".DateControl"></activity>
         
     </application>
     <uses-permission android:name="android.permission.INTERNET" />

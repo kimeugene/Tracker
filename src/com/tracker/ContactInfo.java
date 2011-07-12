@@ -23,11 +23,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,14 +38,15 @@ public class ContactInfo extends Activity{
 	
 	private String date;
 	private ImageView imgView_Photo = null;
+	private ImageView btn_Photo = null;
 	private EditText edTxt_Name;
 	private EditText edTxt_Comments;
 	private TextView txtView_Rating;
+	private TextView txtView_Date;
 	private SeekBar skBar_Rating;
 	private Spinner spinner_Positions;
 	private ArrayAdapter<String> arrayAdapter;
 	private LayoutInflater inflater;
-    private Drawable drawable1;
     private boolean _isEdit = false;
     private int id;
     private ByteArrayBuffer photoArray = new ByteArrayBuffer(0);
@@ -63,11 +62,19 @@ public class ContactInfo extends Activity{
          
         TextView txtView_ID = (TextView) findViewById(R.id.contactInfo_txtView_ID);   
         txtView_ID.setTextColor(Color.WHITE);
-        TextView txtView_Date = (TextView) findViewById(R.id.contactInfo_txtView_Date);
+        txtView_Date = (TextView) findViewById(R.id.contactInfo_txtView_Date);
         txtView_Date.setTextColor(Color.WHITE);
+        txtView_Date.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent myIntent = new Intent(v.getContext(), DateControl.class);
+		        startActivityForResult(myIntent, 2);
+			}
+        });
         edTxt_Name = (EditText) findViewById(R.id.contactInfo_edTxt_Name);
         edTxt_Name.setTextColor(Color.WHITE);
         imgView_Photo = (ImageView) findViewById(R.id.contactInfo_imgView_Photo2);
+        btn_Photo = (ImageView) findViewById(R.id.contactInfo_imgView_Photo1);
         edTxt_Comments = (EditText) findViewById(R.id.contactInfo_edTxt_Comments);
         edTxt_Comments.setTextColor(Color.WHITE);
         txtView_Rating = (TextView) findViewById(R.id.contactInfo_txtView_valueRating);
@@ -103,7 +110,7 @@ public class ContactInfo extends Activity{
 		});
         
         inflater = getLayoutInflater();
-        drawable1 = getResources().getDrawable(R.drawable.icon);
+
         ArrayList<String> items = new ArrayList<String>();
         final Drawable[] arr = new BitmapDrawable[12];
         for (int i = 1; i <= 12; i++) {
@@ -121,14 +128,13 @@ public class ContactInfo extends Activity{
                 }
                 CheckedTextView tv = (CheckedTextView) convertView;
                 tv.setCompoundDrawablesWithIntrinsicBounds(arr[position], null, null, null);
-                //tv.setText(getItem(position));
                 return convertView;
             }
         };
         spinner_Positions.setAdapter(arrayAdapter);
         
         //Photo
-        imgView_Photo.setOnClickListener(new View.OnClickListener() {
+        btn_Photo.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) {
 		        Intent chooseFileIntent = new Intent();
 		        chooseFileIntent.setAction(Intent.ACTION_GET_CONTENT);
@@ -166,14 +172,13 @@ public class ContactInfo extends Activity{
             	spinner_Positions.setSelection(Position);
             	
             	setEditable();
-            	btn_Save.setText("Edit");
             	btn_Save.setOnClickListener(new View.OnClickListener() {
         			public void onClick(View view) {
         				if(!_isEdit)
         				{
         					_isEdit = true;
-        					btn_Save.setText("Save");
-        					setEditable();        					
+        					setEditable();  
+        					btn_Save.setBackgroundResource(R.drawable.btn_save);
         				}
         				else
         				{
@@ -187,26 +192,28 @@ public class ContactInfo extends Activity{
         			}
         		});
             }
-            db.close();
+            db.close(); 
+            btn_Save.setBackgroundResource(R.drawable.btn_edit);
         }
         else //Dobavlenie novogo kontakta
         {
         	//ID
         	DbOpenHelper dbOpenHelper = new DbOpenHelper(ContactInfo.this);
             SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
-            Cursor cursor = db.rawQuery("SELECT id FROM history ORDER BY id DESC LIMIT 1", null);
+            Cursor cursor = db.rawQuery("select seq+1 from sqlite_sequence where name='history'", null);
             if (cursor.getCount() > 0)
             {
             	cursor.moveToFirst();
-            	int count = cursor.getInt(0) + 1;        
+            	int count = cursor.getInt(0);        
             	txtView_ID.setText(String.valueOf(count));
             }
+            else
+            	txtView_ID.setText("1");
             db.close();
             
             //Date
             date = new Date().toLocaleString();
             txtView_Date.setText(date);
-                      
             
             //Rating
             skBar_Rating.setProgress(5);            
@@ -236,7 +243,7 @@ public class ContactInfo extends Activity{
 	private void setEditable()
 	{
 		edTxt_Name.setEnabled(_isEdit);
-    	imgView_Photo.setClickable(_isEdit);
+    	btn_Photo.setClickable(_isEdit);
     	edTxt_Comments.setEnabled(_isEdit);
     	skBar_Rating.setEnabled(_isEdit);
     	spinner_Positions.setClickable(_isEdit);
@@ -293,6 +300,18 @@ public class ContactInfo extends Activity{
 			            
 			            
 					} catch (Exception e) {} 
+			 	}
+			}
+			case 2:
+			{
+				if(data != null)
+			 	{
+					try {
+						Bundle extras = data.getExtras();
+						date = extras.getString("date");
+						txtView_Date.setText(date);
+					}
+					catch (Exception e) {} 
 			 	}
 			}
 		}

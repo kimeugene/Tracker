@@ -35,12 +35,12 @@ public class SplashScreen extends Activity
         /**
          * Uncomment this code if you need upgrade Database
          */
-        dbOpenHelper = new DbOpenHelper(this);
+        /*dbOpenHelper = new DbOpenHelper(this);
         dbOpenHelper.onUpgrade(dbOpenHelper.getReadableDatabase(), 0, 00);
         addNewContact(new Date().toLocaleString(), "Aleksandra", new byte[0], "comments", 9, 1);
         addNewContact(new Date().toLocaleString(), "Kristina", new byte[0], "comments", 10, 2);
         addNewContact(new Date().toLocaleString(), "Tanya", new byte[0], "comments", 9, 3);
-        
+        */
         splash_imv = (ImageView) findViewById(R.id.splash_imv);
         splash_imv.setBackgroundResource(R.animator.splash_anim);
         
